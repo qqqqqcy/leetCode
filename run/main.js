@@ -1,35 +1,21 @@
 /**
  * @param {number[]} nums
- * @param {number} target
  * @return {number}
  */
-var search = function (nums, target) {
+var firstMissingPositive = function (nums) {
     let i = 0,
-        j = nums.length - 1,
-        mid
-    if (nums[i] === target) return i
-    if (nums[j] === target) return j
-    while (i < j) {
-        mid = parseInt((i + j) / 2)
-        if (i === mid || j === mid) {
-            return -1
-        }
-        if (nums[mid] === target) return mid
-
-        // 左边规律
-        if (nums[i] <= nums[mid]) {
-            if (nums[i] <= target && target <= nums[mid]) {
-                j = mid
-            } else {
-                i = mid
-            }
+        tmp
+    while (i < nums.length) {
+        if (nums[nums[i] - 1] != nums[i] && nums[i] - 1 != i && nums[i] > 0 && nums[i] <= nums.length) {
+            tmp = nums[nums[i] - 1]
+            nums[nums[i] - 1] = nums[i]
+            nums[i] = tmp
         } else {
-            if (nums[mid] <= target && target <= nums[j]) {
-                i = mid
-            } else {
-                j = mid
-            }
+            i++
         }
     }
-    return -1
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] != i + 1) return i + 1
+    }
+    return nums.length + 1
 };
