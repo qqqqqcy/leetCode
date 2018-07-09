@@ -1,20 +1,17 @@
 /**
- * @param {string} num1
- * @param {string} num2
- * @return {string}
+ * @param {string} s
+ * @param {string} p
+ * @return {boolean}
  */
-var multiply = function (num1, num2) {
-    let res = new Array(),
-        add = new Array()
-    for (let j = num2.length - 1; j >= 0; j--) {
-        for (let i = num1.length - 1; i >= 0; i--) {
-            let tmp = parseInt(num2[j], 10) * parseInt(num1[i], 10)
-            res[i] = res[i] ? res[i] : 0
-            res[i] += (tmp % 10) + (add[i] ? add[i] : 0)
-            add[i] = 0
-            add[i - 1] = add[i - 1] ? add[i - 1] : 0
-            add[i - 1] += parseInt(tmp / 10, 10)
-        }
+var isMatch = function(s, p) {
+    let dp = new Array()
+    for (let i = 0; i <= s.length; i++) {
+        dp[i] = new Array()
     }
-    return res.join('')
+    dp[0][0] = true
+    for (let i = 0; i <= s.length; i++) {
+        for (let j = 0; j <= p.length; j++) {
+            
+        }        
+    }
 };
