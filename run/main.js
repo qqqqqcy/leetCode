@@ -1,43 +1,20 @@
 /**
- * @param {number[]} nums
- * @return {number}
+ * @param {string} num1
+ * @param {string} num2
+ * @return {string}
  */
-<<<<<<< HEAD
-var firstMissingPositive = function (nums) {
-    let i = 0,
-        tmp
-    while (i < nums.length) {
-        if (nums[nums[i] - 1] != nums[i] && nums[i] - 1 != i && nums[i] > 0 && nums[i] <= nums.length) {
-            tmp = nums[nums[i] - 1]
-            nums[nums[i] - 1] = nums[i]
-            nums[i] = tmp
-        } else {
-            i++
+var multiply = function (num1, num2) {
+    let res = new Array(),
+        add = new Array()
+    for (let j = num2.length - 1; j >= 0; j--) {
+        for (let i = num1.length - 1; i >= 0; i--) {
+            let tmp = parseInt(num2[j], 10) * parseInt(num1[i], 10)
+            res[i] = res[i] ? res[i] : 0
+            res[i] += (tmp % 10) + (add[i] ? add[i] : 0)
+            add[i] = 0
+            add[i - 1] = add[i - 1] ? add[i - 1] : 0
+            add[i - 1] += parseInt(tmp / 10, 10)
         }
     }
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[i] != i + 1) return i + 1
-    }
-    return nums.length + 1
-=======
-var searchInsert = function (nums, target) {
-    let i = 0,
-        j = nums.length - 1,
-        mid
-    if (nums[i] >= target) return i
-    if (nums[j] === target) return j
-    if (nums[j] < target) return j + 1
-    while (i < j) {
-        mid = parseInt((i + j) / 2)
-        if (i === mid || j === mid) {
-            return j
-        }
-        if (nums[mid] === target) return mid
-        if (target <= nums[mid]) {
-            j = mid
-        } else {
-            i = mid
-        }
-    }
->>>>>>> d37825de2e3385475e58a9e1232ccde020356d97
+    return res.join('')
 };
