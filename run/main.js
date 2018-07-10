@@ -1,19 +1,17 @@
 /**
- * @param {string} s
- * @param {string} p
- * @return {boolean}
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
  */
-var isMatch = function (s, p) {
-    let dp = new Array()
-    for (let i = 0; i < s.length; i++) {
-        dp[i] = new Array()
-    }
-    dp[-1][-1] = true
-    for (let i = -1; i < s.length; i++) {
-        for (let j = 0; j < p.length; j++) {
-            if (p[j] === '*') {
-                dp[i][j] = dp[i][j-1]
-            }
+var rotate = function (matrix) {
+    let len = matrix.length - 1,
+        tmp
+    for (let j = 0; j <= parseInt(len / 2, 10); j++) {
+        for (let i = j; i < len - j; i++) {
+            tmp = matrix[j][i]
+            matrix[j][i] = matrix[len - i][j]
+            matrix[len - i][j] = matrix[len - j][len - i]
+            matrix[len - j][len - i] = matrix[i][len - j]
+            matrix[i][len - j] = tmp
         }
     }
 };
