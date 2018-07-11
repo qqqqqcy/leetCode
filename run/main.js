@@ -1,23 +1,17 @@
 /**
- * @param {number} x
- * @param {number} n
+ * @param {number[]} nums
  * @return {number}
  */
-var myPow = function (x, n) {
-    function run(n) {
-        if (n === 1) {
-            return x
-        } else if (n === -1) {
-            return 1 / x
-        } else if (n === 0) return 1
-        let tmp
-        if (n % 2) {
-            tmp = run(parseInt(n / 2, 10))
-            return tmp * tmp * run(n % 2, 10)
+var maxSubArray = function (nums) {
+    let res = nums[0],
+        tmp = 0
+    for (let i = 0; i < nums.length; i++) {
+        res = Math.max(tmp + nums[i], nums[i], res)
+        if (nums[i] > tmp + nums[i]) {
+            tmp = nums[i]
         } else {
-            tmp = run(parseInt(n / 2, 10))
-            return tmp * tmp
+            tmp += nums[i]
         }
     }
-    return parseFloat(run(n), 5)
+    return res
 };
