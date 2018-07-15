@@ -1,27 +1,22 @@
 /**
+ * @param {number} m
  * @param {number} n
- * @param {number} k
- * @return {string}
+ * @return {number}
  */
-var getPermutation = function (n, k) {
-    let str = '123456789',
-        res = new Array(),
-        sum = 0
-
-    function run(str) {
-        if (!str) {
-            sum++
-            return
-        }
-        for (let i = 0; i < str.length; i++) {
-            res.push(str[i])
-            run(str.replace(str[i], ''))
-            if (sum === k) {
-                return
-            }
-            res.pop()
+var uniquePaths = function (m, n) {
+    let dp = new Array()
+    dp[0] = new Array()
+    for (let i = 0; i < m; i++) {
+        dp[0][i] = 1
+    }
+    for (let i = 1; i < n; i++) {
+        dp[i] = new Array()
+        for (let j = 0; j < m; j++) {
+            let tmp = 0
+            if (dp[i - 1]) tmp += dp[i - 1][j]
+            if (dp[i][j - 1]) tmp += dp[i][j - 1]
+            dp[i][j] = tmp
         }
     }
-    run(str.substr(0, n))
-    return res.join('')
+    return dp[n - 1][m - 1]
 };
