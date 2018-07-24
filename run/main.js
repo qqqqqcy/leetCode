@@ -1,34 +1,15 @@
 /**
  * @param {number[]} nums
- * @return {void} Do not return anything, modify nums in-place instead.
+ * @return {number}
  */
-var sortColors = function (nums) {
-    let l = -1,
-        r = nums.length,
-        p = 0
-    while (p < r) {
-        if (nums[p] === 0) {
-            if (p - l === 1) {
-                l++
-                p++
-            } else {
-                l++
-                tmp = nums[l]
-                nums[l] = nums[p]
-                nums[p] = tmp
-            }
-        } else if (nums[p] === 2) {
-            if (r - l === 1) {
-                p++
-            } else {
-                r--
-                tmp = nums[r]
-                nums[r] = nums[p]
-                nums[p] = tmp
-            }
-        } else {
-            p++
+var removeDuplicates = function (nums) {
+    if (nums.length < 2) return nums
+    let t = 2
+    for (let h = 2; h < nums.length; h++) {
+        if (nums[h] !== nums[t - 2]) {
+            nums[t] = nums[h]
+            t++
         }
     }
-
+    nums.length = t
 };
